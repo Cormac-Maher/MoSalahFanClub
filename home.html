@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pascal's Triangle with Hexagons</title>
+
+    <style>
+
+
+        body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    background-color: lightyellow;
+}
+#triangle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+.row {
+    display: flex;
+    justify-content: center;
+}
+.hexagon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightblue;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    margin: 2px;
+    font-weight: bold;
+    color: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    padding: 15px 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+
+        <div class="nav-links">
+            <a href="Home.html">Home</a>
+            <a href="Fractals.html">Fractals</a>
+            <a href="Expansion.html">Binomial Expansion</a>
+            <a href="Diagonals.html">Diagonals</a>
+        </div>
+    </nav>
+
+    <br>
+    <br>
+
+    <h1>Pascal's Triangle</h1>
+    <br>
+    <label for="rows">Enter number of rows to generate (1-16):</label>
+    <input type="number" id="rows" min="1" max="16"/>
+    <button onclick="generateTriangle()">Generate</button>
+
+    <div id="triangle"></div>
+    <script>
+function generateTriangle() {
+    const numRows = document.getElementById("rows").value;
+
+  if (numRows > 16)
+  {
+      numRows = 16;
+  }
+    const triangle = document.getElementById("triangle");
+
+    // Clears existing content
+    triangle.innerHTML = "";
+
+    // Generates Pascal's Triangle
+    const pascalTriangle = [];
+    for (let i = 0; i < numRows; i++) {
+        pascalTriangle[i] = [];
+        for (let j = 0; j <= i; j++) {
+            pascalTriangle[i][j] = (j === 0 || j === i) ? 1 : pascalTriangle[i - 1][j - 1] + pascalTriangle[i - 1][j];
+        }
+
+        // Creates a row
+        const rowDiv = document.createElement("div");
+        rowDiv.className = "row";
+        pascalTriangle[i].forEach(value => {
+            // Creates a hexagon for each value
+            const hexagon = document.createElement("div");
+            hexagon.className = "hexagon";
+            
+            hexagon.textContent = value;
+            rowDiv.appendChild(hexagon);
+        });
+        triangle.appendChild(rowDiv);
+    }
+}
+    </script>
+</body>
+</html>
