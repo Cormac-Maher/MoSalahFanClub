@@ -1,0 +1,5 @@
+The row that will show up will be the index of a given Binomial Expansion.
+
+Triangular numbers are the amount of numbers used to show how many equal circles you would need to create an equilateral triangle.
+
+Tetrahedral numbers are the amount of spheres used to show how many equal spheres you would use to create a tetrahedral triangle called tetrahedron
